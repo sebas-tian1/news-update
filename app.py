@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-API_KEY = os.environ.get('NEWS_API_KEY', 'Your_News_API_Key')
+API_KEY = "ba1348efdaa148eaaea7b2dac258666d"
 BASE_URL = 'https://newsapi.org/v2/top-headlines'
 
 def fetch_news(country: str, page: int, page_size: int):
@@ -35,6 +35,12 @@ def global_news():
     result = fetch_news('us', page, page_size)
     return jsonify(result)
 
+@app.route('/news/id')
+def indonesian_news():
+    page = int(request.args.get('page', 1))
+    page_size = int(request.args.get('page_size', 2))
+    result = fetch_news('id', page, page_size)
+    return jsonify(result)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
